@@ -19,7 +19,13 @@ class Main {
             System.out.println("4. Avsluta programmet");
             System.out.print("Välj ett alternativ: ");
             
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nOgiltigt val. Ange ett nummer mellan 1 och 4.");
+                scanner.next();
+                continue;
+            }
             int val = scanner.nextInt();
+        
             
             switch (val) {
                 case 1:
@@ -37,13 +43,17 @@ class Main {
                         System.out.println("Det finns inga lediga platser.");
                     } else {
                         System.out.print("Ange födelsedatum (ÅÅÅÅMMDD): ");
-                        int födelsedatum = scanner.nextInt();
-                        
-                        if (födelsedatum >= 10000000 && födelsedatum <= 99999999) {
-                            passagerare[ledigPlats] = födelsedatum;
-                            System.out.println("Plats " + (ledigPlats + 1) + " har bokats.");
+                        if (!scanner.hasNextInt()) {
+                            System.out.println("Ogiltigt födelsedatum. Ange endast siffror i formatet ÅÅÅÅMMDD.");
+                            scanner.next();
                         } else {
-                            System.out.println("Ogiltigt födelsedatum. Ange datum i formatet ÅÅÅÅMMDD (8 siffror).");
+                            int födelsedatum = scanner.nextInt();
+                            if (födelsedatum >= 10000000 && födelsedatum <= 99999999) {
+                                passagerare[ledigPlats] = födelsedatum;
+                                System.out.println("Plats " + (ledigPlats + 1) + " har bokats.");
+                            } else {
+                                System.out.println("Ogiltigt födelsedatum. Ange datum i formatet ÅÅÅÅMMDD (8 siffror).");
+                            }
                         }
                     }
                     break;
